@@ -1,18 +1,10 @@
 const User = require('../models/user')
 const createUser = async (req, res) => {
     try{
-        const location = {
-            lat: req.body,
-            lng: req.body
-        };
         const { name } = req.body
+        console.log(name)
         const fields = {
-            name,
-            score,
-            itemsbought,
-            permissionloc,
-            emergency,
-            location
+            name
         };
         const user = await User.create(fields);
         console.log(fields.name, "has been created");
@@ -20,7 +12,7 @@ const createUser = async (req, res) => {
     
     }catch(e){
         console.log(e.toString)
-        return res.send(error, e.toString());
+        return res.send(e.toString());
     }
 
 }
@@ -30,7 +22,7 @@ const getUser = async (req, res) => {
         const users = await User.find({});
         return res.send(users);
     }catch(e){
-        return res.send(error, e.toString());
+        return res.send(e.toString());
     }
 }
 
@@ -44,7 +36,7 @@ const createMessage = async (req,res) => {
 
         return res.send("success");
     }catch(e){
-        return res.send(error, e.toString());
+        return res.send(e.toString());
     }
 }
 
@@ -53,7 +45,7 @@ const getMessage = async (req, res) => {
         const messages = await Message.find({});
         return res.send(messages);
     }catch(e){
-        return res.send(error, e.toString());
+        return res.send(e.toString());
     }
 }
 
