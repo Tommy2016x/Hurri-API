@@ -22,9 +22,13 @@ app.use(cors());
 
 io.on("connection", socket => {
     console.log("Connected");
-    socket.on("clientSend", (x) => {
-        socket.broadcast.emit("clientReceive", x);
-    })
+    socket.on("clientSend", (location) => {
+        socket.broadcast.emit("clientReceive", location);
+    });
+
+    socket.on('Emergency', () => {
+      socket.emit('sendLocations');
+    });
 });
 
 app.use("/", router);

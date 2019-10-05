@@ -49,9 +49,10 @@ const getMessage = async (req, res) => {
     }
 }
 
-const updateUser = async (req, res) => {
+const updateUserLocation = async (req, res) => {
     try{
-        const {location:{lat, lng}, name} = req.body;
+        const {location, name} = req.body;
+        console.log(location);
         
         const user = User.findOneAndUpdate({name}, {location}, {new: true});
 
@@ -106,7 +107,7 @@ router.get('/user', getUser)
 router.get('/user/one', readUser)
 router.get('/message', getMessage)
 router.post('/message', createMessage)
-router.put('/user/location', updateUser)
+router.put('/user/location', updateUserLocation)
 router.put('/user/score', updateScore)
 
 module.exports = router
