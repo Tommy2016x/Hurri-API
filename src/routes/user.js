@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 
 }
 
-const getUser = async (req, res) => {
+const getUsers = async (req, res) => {
     try{
         const users = await User.find({});
         return res.send(users.toString());
@@ -52,10 +52,8 @@ const getMessage = async (req, res) => {
 const updateUserLocation = async (req, res) => {
     try{
         const {lat,lng,name} = req.body;
-
-        location = {lat, lng};
         
-        const user = User.findOneAndUpdate({name}, {location}, {new: true});
+        const user = await User.findOneAndUpdate({name}, {lat, lng}, {new: true}).exec();
 
         return res.send(user.toString());
     }catch(e){
@@ -77,7 +75,7 @@ const updateScore = async (req, res) => {
 
         user.score += counter;
 
-        const updated = User.findOneAndUpdate({name}, {user});
+        const updated = await User.findOneAndUpdate({name}, {user}).exec();
 
         return res.send(updated.toString());
 
@@ -104,7 +102,7 @@ const router = express.Router()
 
 router.get('/', () => {res.send("Welcome to Hurri-API")});
 router.post('/user', createUser)
-router.get('/user', getUser)
+router.get('/user', getUsers)
 router.get('/user/read', readUser)
 router.get('/message', getMessage)
 router.post('/message', createMessage)
