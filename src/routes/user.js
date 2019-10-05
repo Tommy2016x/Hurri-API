@@ -5,7 +5,7 @@ const createUser = async (req, res) => {
             lat: req.body,
             lng: req.body
         };
-        const {name, score, itemsbought, permissionloc, emergency} = req.body
+        const { name } = req.body
         const fields = {
             name,
             score,
@@ -17,7 +17,6 @@ const createUser = async (req, res) => {
         const user = await User.create(fields);
         console.log(fields.name, "has been created");
         return res.send("success");
-        
     
     }catch(e){
         console.log(e.toString)
@@ -98,10 +97,10 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', () => {res.send("Welcome to Hurri-API")});
-router.post('/user/create', createUser)
-router.get('/user/get', getUser)
-router.get('/message/get', getMessage)
-router.post('/message/create', createMessage)
+router.post('/user', createUser)
+router.get('/user', getUser)
+router.get('/message', getMessage)
+router.post('/message', createMessage)
 router.put('/user/location', updateUser)
 router.put('/user/score', updateScore)
 
