@@ -93,9 +93,23 @@ const readUser = async (req, res) => {
 
         return res.send(user.toString());
     }catch(e){
-        return res.send(e);
+        return res.send(e.toString());
     }
 }
+
+const leaderboard = (req,res) => {
+    try{
+        let users = User.find({});
+
+        users.sort({score: desc});
+
+        return res.send(users.toString());
+    }catch(e){
+        return res.send(e.toString());
+    }
+}
+
+
 const express = require('express')
 
 const router = express.Router()
@@ -108,5 +122,6 @@ router.get('/message', getMessage)
 router.post('/message', createMessage)
 router.put('/user/location', updateUserLocation)
 router.put('/user/score', updateScore)
+router.get('/user/leaderboard', leaderboard)
 
 module.exports = router
