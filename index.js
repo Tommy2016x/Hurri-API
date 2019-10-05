@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const db = require('./src/db/index.js')
 const router = require('./src/routes/user.js')
 const http =  require('http');
@@ -33,6 +33,6 @@ io.on("connection", socket => {
 
 app.use("/", router);
 
-server.listen(port, () => {
-    console.log("Server Listening on port: ", port);
+server.listen(PORT, () => {
+    console.log("Server Listening on port: ", PORT);
 })
