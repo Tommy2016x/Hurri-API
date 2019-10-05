@@ -84,6 +84,18 @@ const updateScore = async (req, res) => {
         return res.send(e.toString());
     }
 }
+
+const readUser = (req, res) => {
+    try{
+        const name = req.body
+
+        const user = User.findOne({name});
+
+        return res.send(user);
+    }catch(e){
+        return res.send(e);
+    }
+}
 const express = require('express')
 
 const router = express.Router()
@@ -91,6 +103,7 @@ const router = express.Router()
 router.get('/', () => {res.send("Welcome to Hurri-API")});
 router.post('/user', createUser)
 router.get('/user', getUser)
+router.get('/user/one', readUser)
 router.get('/message', getMessage)
 router.post('/message', createMessage)
 router.put('/user/location', updateUser)
