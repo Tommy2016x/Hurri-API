@@ -7,7 +7,7 @@ items = [{itemName: 'water', bought: false},
 {itemName: 'tuna', bought: false }
 ];
 const userSchema = new mongoose.Schema({
-    location: {lat: {type: String, required:true}, lng: {type:String, required:true}},
+    location: {lat: {type: String, required:false}, lng: {type:String, required:false}},
     name: {type: String, required: true},
     score: {type: Number, default: 0},
     itemsbought: {type: [{ itemName: String, bought: Boolean}], default: items },
