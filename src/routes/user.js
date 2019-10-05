@@ -93,6 +93,18 @@ const updateScore = async (req, res) => {
         return res.send(e.toString());
     }
 }
+
+const readUser = (req, res) => {
+    try{
+        const name = req.body
+
+        const user = User.findOne({name});
+
+        return res.send(user);
+    }catch(e){
+        return res.send(e);
+    }
+}
 const express = require('express')
 
 const router = express.Router()
