@@ -61,21 +61,57 @@ const updateUserLocation = async (req, res) => {
     }
 }
 
+const setEmergency = async (req, res) => {
+  try{
+    const users = await User.find({});
+
+    users.forEach(async user => {
+      const { name } = user;
+      const { emergency: curEmergency } = user;
+
+      await User.findOneAndUpdate({name}, {emergency: !curEmergency});
+    });
+
+    res.send('success');
+
+  } catch (e) {
+    console.log(e);
+    res.send(e.toString());
+  }
+}
+
 const updateScore = async (req, res) => {
     try{
         const {name, items} = req.body;
+        console.log(items);
 
-        let user = User.findOne({name});
-        let counter = 0;
+        let user = await User.findOne({name});
+
+        let { itemsbought, score } = user;
+        console.log(itemsbought);
         
         items.forEach(item => {
-            user.itemsbought.push(item);
-            counter++;
+            itemsbought.forEach(userItem => {
+              const { itemName }= userItem;
+
+              if(itemName === item){
+                Object.assign(userItem, {bought: true});
+              }
+            });
         });
 
-        user.score += counter;
+        score = 0;
 
-        const updated = await User.findOneAndUpdate({name}, {user}).exec();
+        itemsbought.forEach(item => {
+          const { bought } = item;
+
+          if(bought){
+            score++;
+          }
+
+        });
+
+        const updated = await User.findOneAndUpdate({name}, {itemsbought, score}, { new: true }).exec();
 
         return res.send(updated.toString());
 
@@ -85,7 +121,7 @@ const updateScore = async (req, res) => {
     }
 }
 
-const readUser = (req, res) => {
+const readUser = async (req, res) => {
     try{
         const name = req.body
 
@@ -108,5 +144,6 @@ router.get('/message', getMessage)
 router.post('/message', createMessage)
 router.put('/user/location', updateUserLocation)
 router.put('/user/score', updateScore)
+router.put('/user/emergency', setEmergency);
 
 module.exports = router
