@@ -43,7 +43,7 @@ const createMessage = async (req,res) => {
 const getMessage = async (req, res) => {
     try{
         const messages = await Message.find({});
-        return res.send(messages.toString());
+        return res.send(messages);
     }catch(e){
         return res.send(e.toString());
     }
@@ -133,13 +133,13 @@ const readUser = async (req, res) => {
     }
 }
 
-const leaderboard = (req,res) => {
+const leaderboard = async (req,res) => {
     try{
-        let users = User.find({});
+        let users = await User.find({});
 
-        users.sort({score: desc});
+        await users.sort((x,y) => { return y.score - x.score });
 
-        return res.send(users.toString());
+        return res.send(users);
     }catch(e){
         return res.send(e.toString());
     }
