@@ -87,11 +87,11 @@ const updateScore = async (req, res) => {
     }
 }
 
-const readUser = (req, res) => {
+const readUser = async (req, res) => {
     try{
         const name = req.body
 
-        const user = User.findOne({name});
+        const user = await User.findOne({name});
 
         return res.send(user.toString());
     }catch(e){
