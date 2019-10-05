@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
     try{
         const users = await User.find({});
-        return res.send(users);
+        return res.send(users.toString());
     }catch(e){
         return res.send(e.toString());
     }
@@ -43,7 +43,7 @@ const createMessage = async (req,res) => {
 const getMessage = async (req, res) => {
     try{
         const messages = await Message.find({});
-        return res.send(messages);
+        return res.send(messages.toString());
     }catch(e){
         return res.send(e.toString());
     }
@@ -55,7 +55,7 @@ const updateUserLocation = async (req, res) => {
         
         const user = await User.findOneAndUpdate({name}, {lat, lng}, {new: true}).exec();
 
-        return res.send('user');
+        return res.send(user.toString());
     }catch(e){
         return res.send(e.toString());
     }
@@ -77,7 +77,7 @@ const updateScore = async (req, res) => {
 
         const updated = await User.findOneAndUpdate({name}, {user}).exec();
 
-        return res.send(updated);
+        return res.send(updated.toString());
 
         
     }catch(e){
@@ -91,7 +91,7 @@ const readUser = (req, res) => {
 
         const user = await User.findOne({name});
 
-        return res.send(user);
+        return res.send(user.toString());
     }catch(e){
         return res.send(e);
     }
