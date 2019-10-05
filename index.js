@@ -8,7 +8,7 @@ const socket = require("socket.io");
 const server = http.Server(app);
 const io = socket(server);
 const bodyParser = require('body-parser');
-//const cors = require('cors');
+const cors = require('cors');
 
 app.use((req, res, next) =>
 {
@@ -18,7 +18,7 @@ app.use((req, res, next) =>
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-//app.use(cors());
+app.use(cors());
 
 io.on("connection", socket => {
     console.log("Connected");
