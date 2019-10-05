@@ -7,7 +7,8 @@ const http =  require('http');
 const socket = require("socket.io");
 const server = http.Server(app);
 const io = socket(server);
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
+const cors = require(cors());
 
 app.use((req, res, next) =>
 {
