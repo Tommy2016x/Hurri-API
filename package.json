@@ -10,5 +10,8 @@
   "scripts": {
     "start": "node index.js",
     "build": "node build --output public"
+  },
+  "devDependencies": {
+    "@now/node-server": "^0.8.2"
   }
 }
