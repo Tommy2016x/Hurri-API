@@ -11,6 +11,41 @@
       "src": "/user",
       "dest": "/index.js",
       "methods": ["POST"]
+    },
+    {
+      "src": "/user/read",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/message",
+      "dest": "/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/message",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/user/score",
+      "dest": "/index.js",
+      "methods": ["PUT"]
+    },
+    {
+      "src": "/user/location",
+      "dest": "/index.js",
+      "methods": ["PUT"]
+    },
+    {
+      "src": "/user/emergency",
+      "dest": "/index.js",
+      "methods": ["PUT"]
+    },
+    {
+      "src": "/user/leaderboard",
+      "dest": "/index.js",
+      "methods": ["GET"]
     }
   ]
 }
