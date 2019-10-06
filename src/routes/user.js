@@ -150,7 +150,6 @@ const express = require('express')
 
 const router = express.Router()
 
-router.get('/', () => {res.send("Welcome to Hurri-API")});
 router.post('/user', createUser)
 router.get('/user', getUsers)
 router.get('/user/read', readUser)
