@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "my-framework build --output public"
+    "build": "node build --output public"
   }
 }
